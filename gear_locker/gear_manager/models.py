@@ -1,6 +1,18 @@
 from django.db import models
 
 
+class CustomUser(models.Model):
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
+    bio = models.CharField(max_length=100, null=True, blank=True)
+    profile_image = models.ImageField(upload_to='images/', null=True, blank=True)
+    location = models.CharField(max_length=30, null=True, blank=True)
+    primary_sport = models.CharField(max_length=30, null=True, blank=True)
+    default_measurement_system = models.CharField(max_length=10, choices=[('imperial', 'Imperial'), ('metric', 'Metric')], default='metric')
+
+    def __str__(self):
+        return self.user.username
+
+
 class Category(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
@@ -31,7 +43,7 @@ class GearList(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
     entered_by = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True, blank=True)
-    items = models.ManyToManyField(GearListItem, through='Item')
+    items = models.ManyToManyField(GearListItem)
     is_public = models.BooleanField(default=True)
 
     def __str__(self):
