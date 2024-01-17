@@ -1,0 +1,22 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Gear Locker</title>
+        <link rel="stylesheet" href="{% static 'gear_manager/css/style.css' %}">
+    </head>
+    <body>
+        <header>
+            <a href="/">Gear Locker</a>
+        </header>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+        <footer>
+            &copy; {% now "Y" %} Gear Locker
+        </footer>
+    </body>
+</html>
