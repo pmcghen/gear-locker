@@ -9,7 +9,33 @@
     </head>
     <body>
         <header>
-            <a href="/">Gear Locker</a>
+            <div class="row space-between container">
+                <div class="col flex vert-centered">
+                    <a href="/">Gear Locker</a>
+                </div>
+                <div class="col">
+                    {% if user.is_authenticated %}
+                        <div class="row space-between vert-centered">
+                            <nav aria-label="Main Navigation">
+                                <ul class="nav row">
+                                    <li class="nav-item">
+                                        <a href="#">My Gear</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#">My Lists</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#">My Profile</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            {{ user.username }}
+                        </div>
+                    {% else %}
+                        <a href="#">Login</a>
+                    {% endif %}
+                </div>
+            </div>
         </header>
         <main>
             {% block content %}
