@@ -18,6 +18,8 @@
   --footer-text: var(--white);
   --hero-container-bg: rgba(40, 75, 99, 0.4);
   --hero-text: var(--white);
+  --button-text: var(--white);
+  --button-bg: var(--green);
 
   @media (prefers-color-scheme: dark) {
     --bg-color: var(--black);
@@ -60,6 +62,10 @@ h6 {
   max-width: 1400px;
 }
 
+.container--narrow {
+  max-width: 800px;
+}
+
 header {
   padding: 1rem;
 }
@@ -68,6 +74,7 @@ footer {
   background-color: var(--footer-bg);
   color: var(--footer-text);
   padding: 1rem;
+  margin-top: 1rem;
   text-align: center;
 }
 
@@ -117,7 +124,7 @@ footer {
   font-size: 110%;
 }
 
-.hero__with-img {
+.hero--with-img {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -127,4 +134,40 @@ footer {
   background-color: var(--hero-container-bg);
   border-radius: 0.5rem;
   padding: 2rem;
+}
+
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.form-list {
+  padding: 0;
+  margin: 0;
+  width: 80%;
+}
+
+.form-list__item {
+  margin-bottom: 1rem;
+}
+
+.form-list__item label {
+  width: 35%;
+  margin-inline-end: 1rem;
+}
+
+.form-list__item input {
+  width: 60%;
+}
+
+button {
+  border: 0;
+  border-radius: 0.25rem;
+  color: var(--button-text);
+  background-color: var(--button-bg);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
 }
