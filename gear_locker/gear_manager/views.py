@@ -20,5 +20,11 @@ def login_user(request):
         return render(request, 'gear_manager/login.html')
 
 
+def logout_user(request):
+    logout(request)
+    return render(request, 'gear_manager/index.html')
+
+
+
 def add_gear(request):
     return render(request, 'gear_manager/add_gear.html')
