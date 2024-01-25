@@ -36,7 +36,7 @@
                             {{ user.username }}
                         </div>
                     {% else %}
-                        <a href="#">Login</a>
+                        <a href="{% url 'login' %}">Login</a>
                     {% endif %}
                 </div>
             </div>
