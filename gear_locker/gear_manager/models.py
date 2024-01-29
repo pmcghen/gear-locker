@@ -14,6 +14,9 @@ class CustomUser(models.Model):
 
 
 class Category(models.Model):
+    class Meta:
+        verbose_name_plural = 'Categories'
+
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
     entered_by = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True, blank=True)
