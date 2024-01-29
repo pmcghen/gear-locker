@@ -25,7 +25,7 @@ class Category(models.Model):
 class GearListItem(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(default=1)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     weight = models.DecimalField(max_digits=6, decimal_places=2)
     is_worn = models.BooleanField(default=False)

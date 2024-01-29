@@ -1,7 +1,12 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+
+from .models import GearListItem, Category
 
 
 def index(request):
@@ -16,7 +21,7 @@ def login_user(request):
 
         if user is not None:
             login(request, user)
-            return render(request, 'gear_manager/index.html')
+            return HttpResponseRedirect(reverse('index'))
         else:
             return render(request, 'gear_manager/login.html', {'error_message': 'Invalid login'})
     else:
@@ -25,7 +30,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return render(request, 'gear_manager/index.html')
+    return HttpResponseRedirect(reverse('index'))
 
 
 def register_user(request):
@@ -50,8 +55,38 @@ def register_user(request):
         login(request, user)
         return render(request, 'gear_manager/index.html')
 
-    return render(request, 'gear_manager/register.html')
+    return HttpResponseRedirect(reverse('index'))
 
 
+@login_required(login_url='login')
 def add_gear(request):
-    return render(request, 'gear_manager/add_gear.html')
+    if request.method == 'POST':
+        name = request.POST['name']
+        description = request.POST['description']
+        price = request.POST['price']
+        weight = request.POST['weight']
+        url = request.POST['url']
+        image = request.POST['image']
+        category = request.POST['category']
+
+        if price == '':
+            price = 0
+        else:
+            price = float(price)
+
+        if weight == '':
+            weight = 0
+        else:
+            weight = float(weight)
+
+        try:
+            cat = Category.objects.get(name=category)
+        except Category.DoesNotExist:
+            cat = Category.objects.create(name=category, description=category, entered_by=request.user)
+
+        new_item = GearListItem.objects.create(name=name, description=description, price=price, weight=weight, url=url, image=image, entered_by=request.user, category=cat)
+        new_item.save()
+
+        return HttpResponseRedirect(reverse('index'))
+    else:
+        return render(request, 'gear_manager/add_gear.html')
