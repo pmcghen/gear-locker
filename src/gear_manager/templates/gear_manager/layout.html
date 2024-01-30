@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Gear Locker</title>
+        <link rel="stylesheet" href="{% static 'gear_manager/css/style.css' %}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'gear_manager/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'gear_manager/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'gear_manager/favicon-16x16.png' %}">
+        <link rel="manifest" href="{% static 'gear_manager/site.webmanifest' %}">
+    </head>
+    <body>
+        <header>
+            <div class="row space-between container">
+                <div class="col flex vert-centered">
+                    <a href="/">Gear Locker</a>
+                </div>
+                <div class="col">
+                    {% if user.is_authenticated %}
+                        <div class="row space-between vert-centered">
+                            <nav aria-label="Main Navigation">
+                                <ul class="nav row">
+                                    <li class="nav-item">
+                                        <a href="#">My Gear</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#">My Lists</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#">My Profile</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{% url 'logout' %}">Logout</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            {{ user.username }}
+                        </div>
+                    {% else %}
+                        <a href="{% url 'login' %}">Login</a>
+                    {% endif %}
+                </div>
+            </div>
+        </header>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+        <footer>
+            &copy; {% now "Y" %} Gear Locker
+        </footer>
+    </body>
+</html>
