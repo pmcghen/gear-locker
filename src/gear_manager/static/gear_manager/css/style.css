@@ -161,7 +161,9 @@ fieldset {
   width: 60%;
 }
 
-button {
+button,
+.btn,
+.btn:visited {
   border: 0;
   border-radius: 0.25rem;
   color: var(--button-text);
@@ -170,4 +172,8 @@ button {
   font-weight: 600;
   padding: 0.4rem 0.8rem;
   cursor: pointer;
+}
+
+table {
+  margin-bottom: 1rem;
 }

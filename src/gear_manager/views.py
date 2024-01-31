@@ -59,6 +59,12 @@ def register_user(request):
 
 
 @login_required(login_url='login')
+def gear(request):
+    gear_list = GearListItem.objects.filter(entered_by=request.user)
+    return render(request, 'gear_manager/gear.html', {'gear_list': gear_list})
+
+
+@login_required(login_url='login')
 def add_gear(request):
     if request.method == 'POST':
         name = request.POST['name']
@@ -87,6 +93,6 @@ def add_gear(request):
         new_item = GearListItem.objects.create(name=name, description=description, price=price, weight=weight, url=url, image=image, entered_by=request.user, category=cat)
         new_item.save()
 
-        return HttpResponseRedirect(reverse('index'))
+        return HttpResponseRedirect(reverse('gear'))
     else:
         return render(request, 'gear_manager/add_gear.html')

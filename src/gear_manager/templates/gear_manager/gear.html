@@ -1,0 +1,38 @@
+{% extends 'gear_manager/layout.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <h1>My Gear</h1>
+    {% if gear_list %}
+      <p>You have {{ gear_list|length }} items in your gear locker.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Weight</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        {% for item in gear_list %}
+          <tr>
+            <td>
+              <a href="#">{{ item.name }}</a>
+            </td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.weight }}</td>
+            <td>
+              <span class="tag">
+                {{ item.category }}
+              </span>
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <p>You have no items in your gear locker.</p>
+    {% endif %}
+    <a class="btn" href="{% url 'add_gear' %}">Add Gear</a>
+  </div>
+{% endblock %}
