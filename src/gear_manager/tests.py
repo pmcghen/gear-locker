@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from .models import GearListItem
+from .models import GearListItem, GearList
 
 class GearListItemTests(TestCase):
     @classmethod
@@ -15,6 +15,13 @@ class GearListItemTests(TestCase):
             is_worn=False,
             is_consumable=False,
             is_favorite=False,
+        )
+
+        cls.gearList = GearList.objects.create(
+            name='Test List',
+            description='Test Description',
+            entered_by=cls.item.entered_by,
+            is_public=True,
         )
 
     def test_name_content(self):
@@ -83,3 +90,15 @@ class GearListItemTests(TestCase):
         item = GearListItem.objects.get(id=1)
         upload_to = item._meta.get_field('image').upload_to
         self.assertEqual(upload_to, 'images/')
+
+    def test_list_name_content(self):
+        self.assertEqual(self.gearList.name, 'Test List')
+
+    def test_list_description_content(self):
+        self.assertEqual(self.gearList.description, 'Test Description')
+
+    def test_list_entered_by_content(self):
+        self.assertEqual(self.gearList.entered_by, self.item.entered_by)
+
+    def test_list_is_public_content(self):
+        self.assertEqual(self.gearList.is_public, True)

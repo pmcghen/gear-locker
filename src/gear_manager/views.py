@@ -96,3 +96,14 @@ def add_gear(request):
         return HttpResponseRedirect(reverse('gear'))
     else:
         return render(request, 'gear_manager/add_gear.html')
+
+
+@login_required(login_url='login')
+def list(request):
+    return render(request, 'gear_manager/list.html')
+
+
+@login_required(login_url='login')
+def add_list(request):
+    return render(request, 'gear_manager/add_list.html')
+
