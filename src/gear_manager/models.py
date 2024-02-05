@@ -19,6 +19,7 @@ class Category(models.Model):
 
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
+    parent_list = models.ManyToManyField('GearList', blank=True)
     entered_by = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
@@ -46,7 +47,7 @@ class GearList(models.Model):
     name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
     entered_by = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True, blank=True)
-    items = models.ManyToManyField(GearListItem)
+    categories = models.ManyToManyField(Category)
     is_public = models.BooleanField(default=True)
 
     def __str__(self):
