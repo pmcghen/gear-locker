@@ -73,7 +73,6 @@ def add_gear(request):
         weight = request.POST['weight']
         url = request.POST['url']
         image = request.POST['image']
-        category = request.POST['category']
 
         if price == '':
             price = 0
@@ -85,12 +84,7 @@ def add_gear(request):
         else:
             weight = float(weight)
 
-        try:
-            cat = Category.objects.get(name=category)
-        except Category.DoesNotExist:
-            cat = Category.objects.create(name=category, description=category, entered_by=request.user)
-
-        new_item = GearListItem.objects.create(name=name, description=description, price=price, weight=weight, url=url, image=image, entered_by=request.user, category=cat)
+        new_item = GearListItem.objects.create(name=name, description=description, price=price, weight=weight, url=url, image=image, entered_by=request.user)
         new_item.save()
 
         return HttpResponseRedirect(reverse('gear'))

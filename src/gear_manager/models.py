@@ -36,7 +36,6 @@ class GearListItem(models.Model):
     is_favorite = models.BooleanField(default=False)
     url = models.URLField(max_length=200, null=True, blank=True)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE, null=True, blank=True)
     entered_by = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
